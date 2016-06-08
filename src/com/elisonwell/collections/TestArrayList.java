@@ -1,7 +1,6 @@
 package com.elisonwell.collections;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TestArrayList {
@@ -15,8 +14,8 @@ public class TestArrayList {
 	
 	/**
 	 * 经测试：
-	 * 100w的数据，此方法耗时有51mills，而用collections.reverse则耗时12mills
 	 * 100w的数据，此方法耗时有143mills，而用collections.reverse则耗时27mills
+	 * 原因：arrayList.get方法耗时是个常量（O(1)）
 	 * @param list
 	 * @return
 	 */

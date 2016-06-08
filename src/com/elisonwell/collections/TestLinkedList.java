@@ -1,36 +1,58 @@
 package com.elisonwell.collections;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class TestLinkedList {
 	
-	private static List<Integer> list = new LinkedList<>();
+	private static LinkedList<Integer> list = new LinkedList<>();
 	static{
-		for(int i=0;i<10000;i++){
+		for(int i=0;i<1000000;i++){
 			list.add(i);
 		}
 	}
 	
 	/**
 	 * 经测试，100w的数据，此方法耗时有32min，而用collections.reverse则耗时17mills
+	 * 原因：linkedList.get方法耗时较长，每次调用都会从头部或尾部开始查找,耗时为O(n^2)
 	 * @param list
 	 * @return
 	 */
 	public static List<Integer> reverse(LinkedList<Integer> list){
-		List<Integer> reverseList = new LinkedList<>();
+		LinkedList<Integer> reverseList = new LinkedList<>();
 		for(int i=list.size()-1;i>=0;i--){
 			reverseList.add(list.get(i));
 		}
 		return reverseList;
 	}
-	
+	/**
+	 * 经测试，100w的数据耗，此方法耗时16mills
+	 * 原因：linkedList.peekLast方法每次弹出尾部元素，耗时是个常量（O(1)）,故整个方法耗时为O(n)
+	 * @param list
+	 * @return
+	 */
 	public static List<Integer> reverse1(LinkedList<Integer> list){
 		LinkedList<Integer> list1 = list;
-		List<Integer> reverseList = new LinkedList<>();
+		LinkedList<Integer> reverseList = new LinkedList<>();
 		for(int i=list1.size()-1;i>=0;i--){
 			reverseList.add(list1.peekLast());
+		}
+		return reverseList;
+	}
+	
+	/**
+	 * 经测试，100w的数据耗，此方法耗时22mills
+	 * 原因：迭代器会记住当前迭代位置，it.previous或it.next方法耗时是个常量（O(1)）,故整个方法耗时为O(n)
+	 * collections.reverse方法更省时间，因为它只需要迭代list.size的一半即可
+	 * @param list
+	 * @return
+	 */
+	public static List<Integer> reverse2(LinkedList<Integer> list){
+		LinkedList<Integer> reverseList = new LinkedList<>();
+		ListIterator<Integer> it = list.listIterator(list.size());
+		while(it.hasPrevious()){
+			reverseList.add(it.previous());
 		}
 		return reverseList;
 	}
@@ -46,8 +68,8 @@ public class TestLinkedList {
 	
 	
 	public static void main(String[] args){
-		long t = System.currentTimeMillis();
-//		reverse(list);
+//		long t = System.currentTimeMillis();
+//		reverse1(list);
 //		long t1 = System.currentTimeMillis();
 //		System.out.println("reverse耗时："+(t1-t));
 //		Collections.reverse(list);
@@ -60,10 +82,12 @@ public class TestLinkedList {
 //		System.out.println("find耗时："+(t4-t3));
 		
 		long t5 = System.currentTimeMillis();
-		System.out.println(reverse1((LinkedList<Integer>)list));
-		System.out.println(list);
+		List<Integer> list1 = reverse2((LinkedList<Integer>)list);
 		long t6 = System.currentTimeMillis();
-		System.out.println("find耗时："+(t6-t5));
+		System.out.println("reverse2耗时："+(t6-t5));
+		System.out.println(list1.size());
+		System.out.println(list1.get(0));
+		System.out.println(list1.get(list.size()-1));
 	}
 	
 }
