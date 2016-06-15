@@ -1,4 +1,4 @@
-package com.elisonwell.collections;
+package com.elisonwell.datastructure;
 
 import java.util.LinkedList;
 import java.util.List;

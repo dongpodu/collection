@@ -1,4 +1,4 @@
-package com.elisonwell.collections;
+package com.elisonwell.algorithm;
 
 import java.util.Random;
 

@@ -1,2 +1,1 @@
-# collections
-collections学习
+数据结构和算法学习

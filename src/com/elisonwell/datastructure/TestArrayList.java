@@ -1,4 +1,4 @@
-package com.elisonwell.collections;
+package com.elisonwell.datastructure;
 
 import java.util.ArrayList;
 import java.util.List;
