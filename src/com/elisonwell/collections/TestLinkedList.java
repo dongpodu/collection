@@ -50,7 +50,13 @@ public class TestLinkedList {
 	 */
 	public static List<Integer> reverse2(LinkedList<Integer> list){
 		LinkedList<Integer> reverseList = new LinkedList<>();
-		ListIterator<Integer> it = list.listIterator(list.size());
+		/*listIterator(list.size())传得参数是list.size()而不是list.size()-1
+		 * 因为这样可以使得第一次调用previous()时指向的元素为最后一个元素
+		 * 			   
+		 *                              <--迭代器初始位置
+		 * 1    1    1    1     1     1     *
+		 */
+		ListIterator<Integer> it = list.listIterator(list.size());//注意
 		while(it.hasPrevious()){
 			reverseList.add(it.previous());
 		}
@@ -64,6 +70,19 @@ public class TestLinkedList {
 	 */
 	public static Integer find(int index){
 		return list.get(index);
+	}
+	
+	public static LinkedList<Integer> listIteratorSet(){
+		LinkedList<Integer> list = new LinkedList<>();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		ListIterator<Integer> it = list.listIterator();
+		while(it.hasNext()){
+			it.next();
+			it.set(9);//改变上一次next位置对应的值
+		}
+		return list;
 	}
 	
 	
@@ -81,13 +100,12 @@ public class TestLinkedList {
 //		long t4 = System.currentTimeMillis();
 //		System.out.println("find耗时："+(t4-t3));
 		
-		long t5 = System.currentTimeMillis();
-		List<Integer> list1 = reverse2((LinkedList<Integer>)list);
-		long t6 = System.currentTimeMillis();
-		System.out.println("reverse2耗时："+(t6-t5));
-		System.out.println(list1.size());
-		System.out.println(list1.get(0));
-		System.out.println(list1.get(list.size()-1));
+//		long t5 = System.currentTimeMillis();
+//		reverse2((LinkedList<Integer>)list);
+//		long t6 = System.currentTimeMillis();
+//		System.out.println("reverse2耗时："+(t6-t5));
+		
+		System.out.println(listIteratorSet());
 	}
 	
 }
