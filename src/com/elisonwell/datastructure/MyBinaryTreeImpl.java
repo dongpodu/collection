@@ -54,9 +54,6 @@ public class MyBinaryTreeImpl<T extends Comparable<? super T>> {
 		private TreeNode<T> left;
 		private TreeNode<T> right;
 		
-		public TreeNode() {
-			super();
-		}
 		public TreeNode(T t, TreeNode<T> left, TreeNode<T> right) {
 			super();
 			this.t = t;
