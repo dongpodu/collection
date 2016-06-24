@@ -35,21 +35,24 @@ public class TestSort {
 	/**
 	 * 选择排序
 	 * 数据量   耗时（s）
-	 * 100w    160
-	 * 10w     1
+	 * 100w    361
+	 * 10w     3
 	 * @param arrays
 	 */
 	public static void select(int[] arrays){
 		long t = System.currentTimeMillis();
 		int min;
+		int temp;
 		for(int i=0;i<arrays.length;i++){
-			min=arrays[i];
+			min=i;
 			for(int j=i+1;j<arrays.length;j++){
-				if(min>arrays[j]){
-					min = arrays[j];
+				if(arrays[min]>arrays[j]){
+					min = j;
 				}
 			}
-			arrays[i] = min;
+			temp = arrays[i];
+			arrays[i] = arrays[min];
+			arrays[min] = temp;
 		}
 		long t1 = System.currentTimeMillis();
 		System.out.println("select耗时:"+(t1-t));
@@ -116,20 +119,23 @@ public class TestSort {
 	
 	public static void main(String[] args){
 		
-		int[] arrays = new int[1000000];
+		int[] arrays = new int[10];
 		Random rand = new Random();
 		for(int i=0;i<arrays.length;i++){
 			arrays[i] = rand.nextInt();
 		}
 		
 //		bubble(arrays);
+		sysout(arrays);
 		
-//		select(arrays);
+		select(arrays);
+		
+		sysout(arrays);
 		
 //		insert(arrays);
 //		sysout(arrays);
 		
-		shell(arrays);
+//		shell(arrays);
 //		sysout(arrays);
 	}
 	

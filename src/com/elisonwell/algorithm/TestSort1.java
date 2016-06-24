@@ -28,10 +28,7 @@ public class TestSort1 {
 		System.out.println("bubble_sort耗时:"+(t1-t));
 	}
 	/**
-	 * 选择排序,比本人实现的性能略差
-	 * 数据量   耗时（s）
-	 * 100w    361
-	 * 10w     3
+	 * 选择排序,与本人实现的相同
 	 * @param arr
 	 */
 	public static void select_sort(int[] arr) {
