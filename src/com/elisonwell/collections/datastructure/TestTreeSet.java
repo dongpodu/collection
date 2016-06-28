@@ -1,4 +1,4 @@
-package com.elisonwell.datastructure;
+package com.elisonwell.collections.datastructure;
 
 import java.util.Iterator;
 import java.util.TreeSet;
