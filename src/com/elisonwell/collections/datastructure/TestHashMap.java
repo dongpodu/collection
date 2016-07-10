@@ -13,6 +13,7 @@ import com.elisonwell.collections.model.SameHashAndNoComparable;
  * 
  * @author duyisong
  * @createAt 2016年6月28日
+ * hashmap 允许key为null
  */
 public class TestHashMap {
 	
@@ -87,12 +88,17 @@ public class TestHashMap {
 //		long t2 = System.currentTimeMillis();
 //		System.out.println("get返回："+result+"，get耗时："+(t2-t1));
 		
-		long t = System.currentTimeMillis();
-		Map<SameHashAndComparable,Integer> map = put2();
-		long t1 = System.currentTimeMillis();
-		System.out.println("put2耗时："+(t1-t));
-		int result = map.get(new SameHashAndComparable(999));
-		long t2 = System.currentTimeMillis();
-		System.out.println("get返回："+result+"，get耗时："+(t2-t1));
+//		long t = System.currentTimeMillis();
+//		Map<SameHashAndComparable,Integer> map = put2();
+//		long t1 = System.currentTimeMillis();
+//		System.out.println("put2耗时："+(t1-t));
+//		int result = map.get(new SameHashAndComparable(999));
+//		long t2 = System.currentTimeMillis();
+//		System.out.println("get返回："+result+"，get耗时："+(t2-t1));
+		
+		Map<String,String> map1 = new HashMap<>();
+		map1.put(null, "111");
+		map1.put(null, "222");
+		System.out.println(map1.get(null));
 	}
 }

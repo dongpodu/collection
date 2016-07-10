@@ -10,6 +10,10 @@ public class MyBinaryTreeImpl<T extends Comparable<? super T>> {
 	
 	private TreeNode<T> root;
 	
+	/**
+	 * 添加
+	 * @param t
+	 */
 	public void add(T t){
 		if(t==null){
 			return;
@@ -21,6 +25,10 @@ public class MyBinaryTreeImpl<T extends Comparable<? super T>> {
 		}
 	}
 	
+	/**
+	 * 查找最小
+	 * @return
+	 */
 	public T findMin(){
 		if(root==null){
 			return null;
@@ -33,6 +41,45 @@ public class MyBinaryTreeImpl<T extends Comparable<? super T>> {
 		return min.getValue();
 	}
 	
+	/**
+	 * 中序遍历：左-中-右
+	 * 遍历出来的数据是有序的
+	 */
+	public void iterate(){
+		if(root==null){
+			System.out.println("tree is empty");
+		}else{
+			middleIterate(root);
+		}
+	}
+	
+	/**
+	 * 计算树的高度
+	 * @param node
+	 * @return
+	 */
+	public int height(){
+		if(root==null) return 0;
+		return height(root);
+	}
+	
+	private int height(TreeNode<T> node){
+		if(node==null) return -1;
+		int leftHeight = height(node.left)+1;
+		int rightHeight = height(node.right)+1;
+		if(leftHeight>rightHeight){
+			return leftHeight;
+		}
+		return rightHeight;
+	}
+	
+	private void middleIterate(TreeNode<T> node){
+		if(node!=null){
+			middleIterate(node.left);
+			System.out.println(node.getValue());
+			middleIterate(node.right);
+		}
+	}
 	
 	private TreeNode<T> insert(T t,TreeNode<T> node){
 		if(node==null){
@@ -74,6 +121,13 @@ public class MyBinaryTreeImpl<T extends Comparable<? super T>> {
 		tree.add(6);
 		tree.add(8);
 		tree.add(2);
-		System.out.println(tree.findMin());
+		tree.add(1);
+		tree.add(12);
+		tree.add(11);
+		tree.add(13);
+//		System.out.println(tree.findMin());
+		tree.iterate();
+		
+		System.out.println(tree.height());
 	}
 }

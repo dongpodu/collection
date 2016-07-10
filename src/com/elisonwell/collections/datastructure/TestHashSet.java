@@ -27,6 +27,8 @@ public class TestHashSet {
 	}
 	
 	public static void main(String[] args){
+		set.add(null);
+		set.add(null);
 		iterator();
 	}
 }
